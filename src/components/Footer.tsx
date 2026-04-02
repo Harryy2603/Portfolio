@@ -8,9 +8,9 @@ const Footer = () => (
       </p>
       <div className="flex items-center gap-4">
         {[
-          { icon: Github, href: "https://github.com/harryjoshi" },
-          { icon: Linkedin, href: "https://linkedin.com/in/harryjoshi" },
-          { icon: Mail, href: "mailto:harry@example.com" },
+          { icon: Github, href: "https://github.com/Harryy2603" },
+          { icon: Linkedin, href: "https://www.linkedin.com/in/harry-joshi-807a6b268/" },
+          { icon: Mail, href: "mailto:harryjoshi2812@gmail.com" },
         ].map(({ icon: Icon, href }) => (
           <a
             key={href}

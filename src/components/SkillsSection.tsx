@@ -11,9 +11,15 @@ interface Category {
 
 const categories: Category[] = [
   {
+    title: "Languages & Frameworks",
+    icon: Code2,
+    skills: ["JavaScript (ES6+)", "Java", "Python", "SQL"],
+    color: "from-primary to-secondary",
+  },
+  {
     title: "Frontend",
     icon: Code2,
-    skills: ["React", "TypeScript", "Tailwind CSS", "Redux"],
+    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Redux", "Framer Motion", "Bootstrap"],
     color: "from-primary to-secondary",
   },
   {
@@ -29,9 +35,9 @@ const categories: Category[] = [
     color: "from-accent to-primary",
   },
   {
-    title: "DevOps",
+    title: "DevOps and Deployment",
     icon: Cloud,
-    skills: ["AWS", "Docker", "CI/CD"],
+    skills: ["AWS", "Docker", "CI/CD", "GitHub Actions"],
     color: "from-primary to-accent",
   },
   {

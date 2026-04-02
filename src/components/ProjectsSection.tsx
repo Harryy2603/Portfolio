@@ -17,11 +17,20 @@ const projects: Project[] = [
     title: "API Forge",
     subtitle: "GenAI-Native API Workspace",
     description: [
-      "AI-powered mock API generation with live routing",
-      "Simulated responses for rapid prototyping",
-      "Developer productivity tool emphasizing innovation & system design",
+      "GenAI-powered platform that generates mock APIs from natural language prompts",
+      "Deploys live endpoints with full CRUD support and simulated responses",
+      "Enables rapid frontend development by removing backend dependencies",
     ],
-    tech: ["React", "Node.js", "GenAI", "REST APIs"],
+    tech: [
+      "React",
+      "Typescript",
+      "Node.js",
+      "MongoDB",
+      "GenAI",
+      "REST APIs",
+      "WebSockets",
+      "Docker",
+    ],
     github: "#",
     live: "#",
     accent: "from-primary to-secondary",
@@ -30,13 +39,13 @@ const projects: Project[] = [
     title: "Mojo",
     subtitle: "Mood Journal with AI",
     description: [
-      "Full-stack journaling app with ML-based recommendations",
+      "Full-stack mood journaling app with ML-based recommendations",
       "Improved suggestion accuracy by ~35%",
       "Personalized dashboard with streak tracking",
     ],
-    tech: ["React", "Node.js", "MongoDB", "ML"],
-    github: "#",
-    live: "#",
+    tech: ["React", "Node.js", "MongoDB", "ML", "REST APIs", "Deployment"],
+    github: "https://github.com/Harryy2603/MoJo",
+    live: "https://github.com/Harryy2603/MoJo",
     accent: "from-secondary to-accent",
   },
   {
@@ -47,9 +56,9 @@ const projects: Project[] = [
       "Role-based authentication system",
       "Admin dashboard with scalable MERN architecture",
     ],
-    tech: ["React", "Express", "MongoDB", "Stripe"],
-    github: "#",
-    live: "#",
+    tech: ["React", "Express", "MongoDB", "Node.js", "Stripe", "JWT", "Rest APIs", "Deployment"],
+    github: "https://github.com/Harryy2603/foodDelivery",
+    live: "https://github.com/Harryy2603/foodDelivery",
     accent: "from-accent to-primary",
   },
 ];
@@ -59,8 +68,14 @@ const TiltCard = ({ project, index }: { project: Project; index: number }) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [8, -8]), { stiffness: 300, damping: 30 });
-  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-8, 8]), { stiffness: 300, damping: 30 });
+  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [8, -8]), {
+    stiffness: 300,
+    damping: 30,
+  });
+  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-8, 8]), {
+    stiffness: 300,
+    damping: 30,
+  });
 
   const handleMouse = (e: MouseEvent) => {
     const rect = ref.current?.getBoundingClientRect();
@@ -87,15 +102,23 @@ const TiltCard = ({ project, index }: { project: Project; index: number }) => {
       className="glass rounded-2xl p-6 flex flex-col relative group cursor-default"
     >
       {/* Animated top gradient line */}
-      <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${project.accent} rounded-t-2xl opacity-50 group-hover:opacity-100 transition-opacity`} />
+      <div
+        className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${project.accent} rounded-t-2xl opacity-50 group-hover:opacity-100 transition-opacity`}
+      />
 
       {/* Hover glow */}
-      <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-        style={{ boxShadow: "inset 0 0 60px hsl(var(--primary) / 0.05), 0 0 40px hsl(var(--primary) / 0.08)" }}
+      <div
+        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{
+          boxShadow:
+            "inset 0 0 60px hsl(var(--primary) / 0.05), 0 0 40px hsl(var(--primary) / 0.08)",
+        }}
       />
 
       <div className="flex items-start justify-between mb-1">
-        <h3 className="font-display text-xl font-bold text-foreground">{project.title}</h3>
+        <h3 className="font-display text-xl font-bold text-foreground">
+          {project.title}
+        </h3>
         <motion.span
           initial={{ scale: 0 }}
           whileInView={{ scale: 1 }}
@@ -106,29 +129,53 @@ const TiltCard = ({ project, index }: { project: Project; index: number }) => {
           0{index + 1}
         </motion.span>
       </div>
-      <p className="text-sm text-primary mb-4 font-medium">{project.subtitle}</p>
+      <p className="text-sm text-primary mb-4 font-medium">
+        {project.subtitle}
+      </p>
       <ul className="space-y-2 mb-6 flex-1">
         {project.description.map((d, i) => (
-          <li key={i} className="text-sm text-muted-foreground leading-relaxed flex gap-2">
+          <li
+            key={i}
+            className="text-sm text-muted-foreground leading-relaxed flex gap-2"
+          >
             <span className="text-primary mt-1">▹</span> {d}
           </li>
         ))}
       </ul>
       <div className="flex flex-wrap gap-2 mb-5">
         {project.tech.map((t) => (
-          <span key={t} className="px-2.5 py-1 text-xs rounded-md bg-muted text-muted-foreground font-medium hover:text-foreground hover:bg-muted/80 transition-colors">
+          <span
+            key={t}
+            className="px-2.5 py-1 text-xs rounded-md bg-muted text-muted-foreground font-medium hover:text-foreground hover:bg-muted/80 transition-colors"
+          >
             {t}
           </span>
         ))}
       </div>
       <div className="flex gap-3">
         {project.github && (
-          <motion.a whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} href={project.github} target="_blank" rel="noopener noreferrer" aria-label={`${project.title} GitHub`} className="p-2 rounded-lg glass-subtle hover:bg-card/60 transition-colors text-muted-foreground hover:text-foreground">
+          <motion.a
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${project.title} GitHub`}
+            className="p-2 rounded-lg glass-subtle hover:bg-card/60 transition-colors text-muted-foreground hover:text-foreground"
+          >
             <Github size={16} />
           </motion.a>
         )}
         {project.live && (
-          <motion.a whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} href={project.live} target="_blank" rel="noopener noreferrer" aria-label={`${project.title} Live Demo`} className="p-2 rounded-lg glass-subtle hover:bg-card/60 transition-colors text-muted-foreground hover:text-foreground">
+          <motion.a
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            href={project.live}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${project.title} Live Demo`}
+            className="p-2 rounded-lg glass-subtle hover:bg-card/60 transition-colors text-muted-foreground hover:text-foreground"
+          >
             <ExternalLink size={16} />
           </motion.a>
         )}
@@ -153,7 +200,9 @@ const ProjectsSection = () => {
           transition={{ duration: 0.6 }}
           className="mb-12"
         >
-          <h2 className="font-display text-3xl md:text-4xl font-bold mb-2 gradient-text">Projects</h2>
+          <h2 className="font-display text-3xl md:text-4xl font-bold mb-2 gradient-text">
+            Projects
+          </h2>
           <div className="w-16 h-1 bg-primary rounded-full" />
         </motion.div>
 
@@ -177,7 +226,7 @@ const ProjectsSection = () => {
           >
             Jarvis AI Desktop Assistant
           </motion.span>{" "}
-          — voice-controlled productivity tool built with Python
+          — voice-controlled, Tri-Tier (3-Level) Architecture productivity tool built with Python
         </motion.p>
       </div>
     </section>

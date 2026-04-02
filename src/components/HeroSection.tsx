@@ -5,7 +5,7 @@ import FloatingTerminal from "./FloatingTerminal";
 
 const roles = [
   "Full-Stack Engineer",
-  "React Developer",
+  "Frontend Developer",
   "Backend Architect",
   "Cloud Builder",
   "AI Enthusiast",
@@ -158,15 +158,16 @@ const HeroSection = () => {
               className="flex items-center justify-center lg:justify-start gap-4 mt-8"
             >
               {[
-                { icon: Github, href: "https://github.com/harryjoshi", label: "GitHub" },
-                { icon: Linkedin, href: "https://linkedin.com/in/harryjoshi", label: "LinkedIn" },
-                { icon: FileText, href: "#", label: "Resume" },
+                { icon: Github, href: "https://github.com/Harryy2603", label: "GitHub" },
+                { icon: Linkedin, href: "https://www.linkedin.com/in/harry-joshi-807a6b268/", label: "LinkedIn" },
+                { icon: FileText, href: "/resume.pdf", label: "Resume", download: true },
               ].map(({ icon: Icon, href, label }, i) => (
                 <motion.a
                   key={label}
                   href={href}
-                  target="_blank"
+                  target={label === "Resume" ? "_self" : "_blank"}
                   rel="noopener noreferrer"
+                  download={label === "Resume"}
                   aria-label={label}
                   whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.95 }}
@@ -188,7 +189,7 @@ const HeroSection = () => {
               className="flex items-center justify-center lg:justify-start gap-8 mt-10"
             >
               {[
-                { value: "3+", label: "Projects" },
+                { value: "10+", label: "Projects" },
                 { value: "40%", label: "Usability Boost" },
                 { value: "35%", label: "Accuracy Gain" },
               ].map((stat) => (

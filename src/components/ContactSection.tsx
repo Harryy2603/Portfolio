@@ -1,6 +1,13 @@
 import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
-import { Mail, Linkedin, Github, FileText, Send, ArrowUpRight } from "lucide-react";
+import {
+  Mail,
+  Linkedin,
+  Github,
+  FileText,
+  Send,
+  ArrowUpRight,
+} from "lucide-react";
 
 const ContactSection = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -26,10 +33,13 @@ const ContactSection = () => {
           transition={{ duration: 0.6 }}
           className="mb-12 text-center"
         >
-          <h2 className="font-display text-3xl md:text-4xl font-bold mb-2 gradient-text">Get in Touch</h2>
+          <h2 className="font-display text-3xl md:text-4xl font-bold mb-2 gradient-text">
+            Get in Touch
+          </h2>
           <div className="w-16 h-1 bg-primary rounded-full mx-auto mb-4" />
           <p className="text-muted-foreground max-w-md mx-auto">
-            Have a project in mind or just want to say hi? Feel free to reach out.
+            Have a project in mind or just want to say hi? Feel free to reach
+            out.
           </p>
         </motion.div>
 
@@ -42,9 +52,21 @@ const ContactSection = () => {
             className="space-y-5"
           >
             {[
-              { icon: Mail, label: "harry@example.com", href: "mailto:harry@example.com" },
-              { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/in/harryjoshi" },
-              { icon: Github, label: "GitHub", href: "https://github.com/harryjoshi" },
+              {
+                icon: Mail,
+                label: "harryjoshi2812@gmail.com",
+                href: "mailto:harry@example.com",
+              },
+              {
+                icon: Linkedin,
+                label: "LinkedIn",
+                href: "https://www.linkedin.com/in/harry-joshi-807a6b268/",
+              },
+              {
+                icon: Github,
+                label: "GitHub",
+                href: "https://github.com/Harryy2603",
+              },
             ].map(({ icon: Icon, label, href }, i) => (
               <motion.a
                 key={label}
@@ -64,12 +86,16 @@ const ContactSection = () => {
                 <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors flex-1">
                   {label}
                 </span>
-                <ArrowUpRight size={14} className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                <ArrowUpRight
+                  size={14}
+                  className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity"
+                />
               </motion.a>
             ))}
 
             <motion.a
-              href="#"
+              href="/resume.pdf"
+              download="Harry_Joshi_Resume.pdf"
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -78,7 +104,8 @@ const ContactSection = () => {
               whileTap={{ scale: 0.98 }}
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium glass hover:bg-card/80 transition-all text-foreground mt-2 hover:shadow-[0_0_30px_hsl(var(--primary)/0.1)]"
             >
-              <FileText size={16} /> Download Resume
+              <FileText size={16} />
+              Download Resume
             </motion.a>
           </motion.div>
 
@@ -91,7 +118,8 @@ const ContactSection = () => {
             className="glass rounded-2xl p-6 space-y-4 relative overflow-hidden"
           >
             {/* Animated border glow on focus */}
-            <div className={`absolute inset-0 rounded-2xl transition-opacity duration-500 pointer-events-none ${focused ? "opacity-100" : "opacity-0"}`}
+            <div
+              className={`absolute inset-0 rounded-2xl transition-opacity duration-500 pointer-events-none ${focused ? "opacity-100" : "opacity-0"}`}
               style={{ boxShadow: "inset 0 0 40px hsl(var(--primary) / 0.05)" }}
             />
 
@@ -104,10 +132,14 @@ const ContactSection = () => {
                     type={field === "email" ? "email" : "text"}
                     placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
                     required
-                    maxLength={field === "message" ? 1000 : field === "email" ? 255 : 100}
+                    maxLength={
+                      field === "message" ? 1000 : field === "email" ? 255 : 100
+                    }
                     {...(isTextarea ? { rows: 4 } : {})}
                     value={form[field as keyof typeof form]}
-                    onChange={(e) => setForm({ ...form, [field]: e.target.value })}
+                    onChange={(e) =>
+                      setForm({ ...form, [field]: e.target.value })
+                    }
                     onFocus={() => setFocused(field)}
                     onBlur={() => setFocused(null)}
                     className={`w-full px-4 py-3 rounded-lg bg-muted border text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all duration-300 ${

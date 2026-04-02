@@ -40,8 +40,8 @@ const AboutSection = () => {
             className="space-y-4"
           >
             {[
-              { label: "React / TypeScript", value: 92 },
-              { label: "Node.js / Express", value: 85 },
+              { label: "React / TypeScript / Next.js", value: 92 },
+              { label: "Node.js / Express / MongoDB", value: 90 },
               { label: "Cloud / DevOps", value: 75 },
               { label: "AI / ML Integration", value: 70 },
             ].map((skill, i) => (
