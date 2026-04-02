@@ -7,10 +7,12 @@ import ExperienceSection from "@/components/ExperienceSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
+import ParticleField from "@/components/ParticleField";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
+      <ParticleField />
       <ScrollProgress />
       <Navbar />
       <HeroSection />

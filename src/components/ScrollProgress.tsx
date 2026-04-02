@@ -1,8 +1,7 @@
-import { motion } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 
 const ScrollProgress = () => {
-  // Using framer-motion useScroll at component level
-  const { scrollYProgress } = require("framer-motion").useScroll();
+  const { scrollYProgress } = useScroll();
   return (
     <motion.div
       style={{ scaleX: scrollYProgress, transformOrigin: "0%" }}
