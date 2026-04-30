@@ -13,13 +13,13 @@ const categories: Category[] = [
   {
     title: "Languages & Frameworks",
     icon: Code2,
-    skills: ["JavaScript (ES6+)", "Java", "Python", "SQL"],
+    skills: ["JavaScript (ES6+)", "TypeScript", "Java", "Python", "SQL"],
     color: "from-primary to-secondary",
   },
   {
     title: "Frontend",
     icon: Code2,
-    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Redux", "Framer Motion", "Bootstrap"],
+    skills: ["React", "Next.js", "Tailwind CSS", "Redux", "Framer Motion", "Bootstrap", "UI/UX Design"],
     color: "from-primary to-secondary",
   },
   {
@@ -31,7 +31,7 @@ const categories: Category[] = [
   {
     title: "Databases",
     icon: Database,
-    skills: ["MongoDB", "MySQL"],
+    skills: ["MongoDB", "MySQL", "NoSQL", "Mongoose", "Prisma"],
     color: "from-accent to-primary",
   },
   {

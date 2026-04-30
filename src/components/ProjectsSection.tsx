@@ -25,14 +25,17 @@ const projects: Project[] = [
       "React",
       "Typescript",
       "Node.js",
+      "Express",
       "MongoDB",
       "GenAI",
       "REST APIs",
       "WebSockets",
       "Docker",
+      "Redis",
+      "BullMQ",
     ],
-    github: "#",
-    live: "#",
+    github: "https://github.com/Harryy2603/API-Forge",
+    live: "https://github.com/Harryy2603/API-Forge",
     accent: "from-primary to-secondary",
   },
   {
@@ -43,9 +46,19 @@ const projects: Project[] = [
       "Improved suggestion accuracy by ~35%",
       "Personalized dashboard with streak tracking",
     ],
-    tech: ["React", "Node.js", "MongoDB", "ML", "REST APIs", "Deployment"],
+    tech: [
+      "React",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Machine Learning",
+      "REST APIs",
+      "Docker",
+      "CI/CD",
+      "Cloud Deployment",
+    ],
     github: "https://github.com/Harryy2603/MoJo",
-    live: "https://github.com/Harryy2603/MoJo",
+    live: "https://mojo-frontend-services.onrender.com",
     accent: "from-secondary to-accent",
   },
   {
@@ -56,9 +69,19 @@ const projects: Project[] = [
       "Role-based authentication system",
       "Admin dashboard with scalable MERN architecture",
     ],
-    tech: ["React", "Express", "MongoDB", "Node.js", "Stripe", "JWT", "Rest APIs", "Deployment"],
+    tech: [
+      "React",
+      "Express",
+      "MongoDB",
+      "Node.js",
+      "Stripe",
+      "JWT",
+      "Rest APIs",
+      "Docker",
+      "Cloud Deployment",
+    ],
     github: "https://github.com/Harryy2603/foodDelivery",
-    live: "https://github.com/Harryy2603/foodDelivery",
+    live: "https://fooddelivery-frontend-fm4p.onrender.com",
     accent: "from-accent to-primary",
   },
 ];
@@ -226,7 +249,8 @@ const ProjectsSection = () => {
           >
             Jarvis AI Desktop Assistant
           </motion.span>{" "}
-          — voice-controlled, Tri-Tier (3-Level) Architecture productivity tool built with Python
+          — voice-controlled, Tri-Tier (3-Level) Architecture productivity tool
+          built with Python
         </motion.p>
       </div>
     </section>

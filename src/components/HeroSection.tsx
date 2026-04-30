@@ -189,7 +189,7 @@ const HeroSection = () => {
               className="flex items-center justify-center lg:justify-start gap-8 mt-10"
             >
               {[
-                { value: "10+", label: "Projects" },
+                { value: "20+", label: "Projects" },
                 { value: "40%", label: "Usability Boost" },
                 { value: "35%", label: "Accuracy Gain" },
               ].map((stat) => (
