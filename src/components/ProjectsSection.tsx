@@ -1,6 +1,6 @@
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { ExternalLink, Github } from "lucide-react";
-import { useRef, type MouseEvent } from "react";
+import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { ChevronDown, ExternalLink, Github } from "lucide-react";
+import { useRef, useState, type MouseEvent } from "react";
 
 interface Project {
   title: string;
@@ -15,29 +15,74 @@ interface Project {
 const projects: Project[] = [
   {
     title: "API Forge",
-    subtitle: "GenAI-Native API Workspace",
+    subtitle: "Multi-Tenant SaaS API Generator",
     description: [
-      "GenAI-powered platform that generates mock APIs from natural language prompts",
-      "Deploys live endpoints with full CRUD support and simulated responses",
-      "Enables rapid frontend development by removing backend dependencies",
+      "Multi-tenant SaaS platform that converts natural language into live, callable REST APIs via LLMs - cutting backend mock setup from hours to under 10 seconds",
+      "Designed and shipped solo, from data model through production deployment - JWT auth, tenant isolation, rate limiting, and an async BullMQ/Redis pipeline for concurrent request handling, fully containerized with Docker",
+      "Built the core natural-language-to-live-API abstraction as a repeatable system rather than a one-off demo, holding up across different inputs and tenants in real usage",
     ],
     tech: [
-      "React",
-      "Typescript",
       "Node.js",
-      "Express",
+      "Express.js",
       "MongoDB",
-      "GenAI",
-      "REST APIs",
-      "WebSockets",
-      "Docker",
       "Redis",
       "BullMQ",
+      "Docker",
+      "React.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "LLM APIs",
     ],
     github: "https://github.com/Harryy2603/API-Forge",
-    live: "https://github.com/Harryy2603/API-Forge",
+    live: "https://api-forge-ui.onrender.com",
     accent: "from-primary to-secondary",
   },
+  {
+    title: "RocketMan AI",
+    subtitle: "Adaptive Learner Memory System",
+    description: [
+      "Owned end-to-end: mapped the workflow, designed the data model, built the agent behavior, then ran it against real conversations and fixed what broke - the build-inspect-fix loop this role runs on",
+      "Designed an agent loop that decouples real-time response generation from background evaluation - the AI replies instantly while a separate task extracts structured state (mastery scores, confidence, evidence) via Zod-enforced schemas and writes it to Postgres",
+      "Built a persistent memory layer that injects a user's full history into every interaction, so agent behavior compounds and personalizes over time instead of resetting each session",
+      "Benchmarked model providers under real latency and rate-limit constraints and switched the production pipeline based on the results - treating model choice as an engineering decision, not a default",
+    ],
+    tech: [
+      "Next.js",
+      "Vercel AI SDK",
+      "Groq (Llama 3.3 70B)",
+      "PostgreSQL",
+      "Supabase",
+      "Zod",
+      "TypeScript",
+    ],
+    github: "https://github.com/Harryy2603/rocketman-tutor",
+    live: "https://rocketman-tutor.vercel.app",
+    accent: "from-secondary to-accent",
+  },
+  {
+    title: "J.A.R.V.I.S.",
+    subtitle: "Multi-Modal AI Desktop Assistant",
+    description: [
+      "Tri-Tier Hybrid Architecture routing simple OS commands to a local, offline model for zero-latency execution while complex conversational tasks go to Groq's Llama-3 for heavy lifting",
+      "Trained a Bi-Directional LSTM for local intent classification with a 90% confidence gate — anything less confident falls back safely to the cloud LLM tier",
+      "Solved a native Windows audio-mixer crash by ripping out pygame for playsound, letting TTS audio play natively and concurrently without locking the audio thread",
+      "Fully multithreaded: speech recognition, TTS generation, and the customtkinter UI run on separate daemon threads so the app never freezes mid-response",
+    ],
+    tech: [
+      "Python",
+      "TensorFlow/Keras",
+      "Groq",
+      "LSTM",
+      "customtkinter",
+      "Speech Recognition",
+      "Multithreading",
+    ],
+    github: "https://github.com/Harryy2603/Jarviss",
+    accent: "from-accent to-primary",
+  },
+];
+
+const moreProjects: Project[] = [
   {
     title: "Mojo",
     subtitle: "Mood Journal with AI",
@@ -59,7 +104,7 @@ const projects: Project[] = [
     ],
     github: "https://github.com/Harryy2603/MoJo",
     live: "https://mojo-frontend-services.onrender.com",
-    accent: "from-secondary to-accent",
+    accent: "from-primary to-secondary",
   },
   {
     title: "Food Delivery App",
@@ -76,12 +121,25 @@ const projects: Project[] = [
       "Node.js",
       "Stripe",
       "JWT",
-      "Rest APIs",
+      "REST APIs",
       "Docker",
       "Cloud Deployment",
     ],
     github: "https://github.com/Harryy2603/foodDelivery",
     live: "https://fooddelivery-frontend-fm4p.onrender.com",
+    accent: "from-secondary to-accent",
+  },
+  {
+    title: "AI Prompt Playground",
+    subtitle: "LLM Prompt Testing Sandbox",
+    description: [
+      "Interactive sandbox for writing, running, and comparing prompts across different model configurations side by side",
+      "Built with a Next.js app router frontend so iterating on a prompt and inspecting the response is a tight, fast loop",
+      "Fully containerized with Docker for consistent, reproducible deployment",
+    ],
+    tech: ["Next.js", "TypeScript", "Docker", "Tailwind CSS", "LLM APIs"],
+    github: "https://github.com/Harryy2603/ai-prompt-playground-app",
+    live: "https://ai-playground-ucgm.onrender.com",
     accent: "from-accent to-primary",
   },
 ];
@@ -120,7 +178,7 @@ const TiltCard = ({ project, index }: { project: Project; index: number }) => {
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.15 }}
+      transition={{ duration: 0.6, delay: (index % 3) * 0.15 }}
       style={{ rotateX, rotateY, transformPerspective: 800 }}
       className="glass rounded-2xl p-6 flex flex-col relative group cursor-default"
     >
@@ -146,7 +204,7 @@ const TiltCard = ({ project, index }: { project: Project; index: number }) => {
           initial={{ scale: 0 }}
           whileInView={{ scale: 1 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.5 + index * 0.15, type: "spring" }}
+          transition={{ delay: 0.5 + (index % 3) * 0.15, type: "spring" }}
           className="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary font-mono"
         >
           0{index + 1}
@@ -208,6 +266,8 @@ const TiltCard = ({ project, index }: { project: Project; index: number }) => {
 };
 
 const ProjectsSection = () => {
+  const [showMore, setShowMore] = useState(false);
+
   return (
     <section id="projects" className="py-24 md:py-32 relative">
       {/* Section background accent */}
@@ -235,23 +295,44 @@ const ProjectsSection = () => {
           ))}
         </div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          className="text-center text-sm text-muted-foreground mt-10"
-        >
-          More projects:{" "}
-          <motion.span
-            whileHover={{ color: "hsl(var(--primary))" }}
-            className="text-foreground font-medium cursor-default"
+        <AnimatePresence>
+          {showMore && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.5 }}
+              className="overflow-hidden"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+                {moreProjects.map((project, i) => (
+                  <TiltCard
+                    key={project.title}
+                    project={project}
+                    index={projects.length + i}
+                  />
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <div className="flex justify-center mt-10">
+          <motion.button
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            onClick={() => setShowMore((prev) => !prev)}
+            className="flex items-center gap-2 px-5 py-2.5 rounded-full glass-subtle text-sm font-medium text-foreground hover:bg-card/60 transition-colors"
           >
-            Jarvis AI Desktop Assistant
-          </motion.span>{" "}
-          — voice-controlled, Tri-Tier (3-Level) Architecture productivity tool
-          built with Python
-        </motion.p>
+            {showMore ? "Show less" : "See more projects"}
+            <motion.span
+              animate={{ rotate: showMore ? 180 : 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <ChevronDown size={16} />
+            </motion.span>
+          </motion.button>
+        </div>
       </div>
     </section>
   );
